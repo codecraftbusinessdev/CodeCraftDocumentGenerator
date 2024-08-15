@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<nav>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#offer_letter">Offer Letter</a></li>
+        <li><a href="#certificate">Certificate</a></li>
+
+    </ul>
+</nav>
+<h1>Code craft document generator</h1>
+<p>Enter certificate ID:</p>
+<input type="text" id="certificateId" placeholder="Certificate ID">
+<button id="verifyButton">Verify</button>
+<br><br>
+<table id="certificateTable">
+    <thead>
+    <tr>
+
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+
+    const verifyButton = document.getElementById('verifyButton');
+    const certificateTable = document.getElementById('certificateTable');
+    const certificateIdInput = document.getElementById('certificateId');
+
+    verifyButton.addEventListener('click', async () => {
+        const certificateId = certificateIdInput.value;
+
+        if (!certificateId) {
+            alert('Please enter a certificate ID.');
+            return;
+        }
+
+        try {
+
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec?certificate_id='+certificateId);
+            const data = await response.json();
+
+            if (data.error) {
+                alert(data.error); // Handle errors from the backend
+                return;
+            }
+
+            // Clear existing table rows before adding new data
+            certificateTable.tBodies[0].innerHTML = '';
+
+            const tableRow1 = document.createElement('tr');
+            const tableRow2 = document.createElement('tr');
+            const tableRow3 = document.createElement('tr');
+            const tableRow4 = document.createElement('tr');
+            const tableRow5 = document.createElement('tr');
+            const tableRow6 = document.createElement('tr');
+            const tableRow7 = document.createElement('tr');
+            const tableRow8 = document.createElement('tr');
+            const tableRow9 = document.createElement('tr');
+            const tableRow10 = document.createElement('tr');
+            const tableRow11 = document.createElement('tr');
+            const tableRow12 = document.createElement('tr');
+            const tableRow13 = document.createElement('tr');
+            const tableRow14 = document.createElement('tr');
+            const tableRow15 = document.createElement('tr');
+
+
+            tableRow1.innerHTML = `
+                <th>Certificate ID</th>
+                <td>${data.data[0].certificate_id}</td>
+            `;
+            tableRow2.innerHTML = `
+                <th>Name</th>
+                <td>${data.data[0].name}</td>
+            `;
+            tableRow3.innerHTML = `
+                <th>Email</th>
+                <td>${data.data[0].email}</td>
+            `;
+            tableRow4.innerHTML = `
+                <th>Mobile No</th>
+                <td>${data.data[0].mobile_no}</td>
+            `;
+            tableRow5.innerHTML = `
+                <th>Gender</th>
+                <td>${data.data[0].gender}</td>
+            `;
+            tableRow6.innerHTML = `
+                <th>Internship Duration</th>
+                <td>${data.data[0].internship_duration}</td>
+            `;
+            tableRow7.innerHTML = `
+                <th>Internship Track</th>
+                <td>${data.data[0].internship_track}</td>
+            `;
+            tableRow8.innerHTML = `
+                <th>College Name</th>
+                <td>${data.data[0].college_name}</td>
+            `;
+            tableRow9.innerHTML = `
+                <th>Qualification</th>
+                <td>${data.data[0].qualification}</td>
+            `;
+            tableRow10.innerHTML = `
+                <th>Passing Year</th>
+                <td>${data.data[0].passing_year}</td>
+            `;
+            tableRow11.innerHTML = `
+                <th>Offer Letter Issue Date</th>
+                <td>${data.data[0].offer_letter_issue_date}</td>
+            `;
+            tableRow12.innerHTML = `
+                <th>Internship Start Date</th>
+                <td>${data.data[0].internship_start_date}</td>
+            `;
+            tableRow13.innerHTML = `
+                <th>Internship End Date</th>
+                <td>${data.data[0].internship_end_date}</td>
+            `;
+            tableRow14.innerHTML = `
+                <th>Internship Status</th>
+                <td>${data.data[0].internship_status}</td>
+            `;
+            tableRow15.innerHTML = `
+                <th>Certificate Issue Date</th>
+                <td>${data.data[0].certificate_issue_date}</td>
+            `;
+
+            certificateTable.tBodies[0].appendChild(tableRow1);
+            certificateTable.tBodies[0].appendChild(tableRow2);
+            certificateTable.tBodies[0].appendChild(tableRow3);
+            certificateTable.tBodies[0].appendChild(tableRow4);
+            certificateTable.tBodies[0].appendChild(tableRow5);
+            certificateTable.tBodies[0].appendChild(tableRow6);
+            certificateTable.tBodies[0].appendChild(tableRow7);
+            certificateTable.tBodies[0].appendChild(tableRow8);
+            certificateTable.tBodies[0].appendChild(tableRow9);
+            certificateTable.tBodies[0].appendChild(tableRow10);
+            certificateTable.tBodies[0].appendChild(tableRow11);
+            certificateTable.tBodies[0].appendChild(tableRow12);
+            certificateTable.tBodies[0].appendChild(tableRow13);
+            certificateTable.tBodies[0].appendChild(tableRow14);
+            certificateTable.tBodies[0].appendChild(tableRow15);
+
+        } catch (error) {
+            console.error('Error fetching certificate:', error);
+            alert('An error occurred. Please try again later.' + error);
+        }
+    });
+</script>
+
+<div id="offer_letter" class="container">
+    <h1>Offer Letter Details</h1>
+    <form id="offerLetterForm">
+
+        <label for="letterId">Letter ID:</label>
+        <input type="text" id="letterId" name="letterId" required>
+
+        <label for="letterName">Name:</label>
+        <input type="text" id="letterName" name="letterName" required>
+
+        <label for="letterInternshipDuration">Internship Duration:</label>
+        <input type="text" id="letterInternshipDuration" name="letterInternshipDuration" required>
+
+        <label for="letterInternshipTrack">Internship Track:</label>
+        <input type="text" id="letterInternshipTrack" name="letterInternshipTrack" required>
+
+        <label for="letterIssueDate">Issue Date:</label>
+        <input type="text" id="letterIssueDate" name="letterIssueDate" required>
+
+        <label for="letterStartDate">Start Date:</label>
+        <input type="text" id="letterStartDate" name="letterStartDate" required>
+
+        <label for="letterEndDate">End Date:</label>
+        <input type="text" id="letterEndDate" name="letterEndDate" required>
+
+        <button style="background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;" id="generateButton">Generate
+        </button>
+
+
+    </form>
+    <iframe src="" id="offerletter_pdf" frameborder="0" width="500px" height="720px"></iframe>
+
+</div>
+
+<div id="certificate" class="container">
+    <h1>Certificate Details</h1>
+    <form id="certificateForm">
+
+        <label for="certificateId">Certificate ID:</label>
+        <input type="text" id="certificate_Id" name="certificateId" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="collegeName">College Name:</label>
+        <input type="text" id="collegeName" name="collegeName" required>
+
+        <label for="internshipTrack">Internship Track:</label>
+        <input type="text" id="internshipTrack" name="internshipTrack" required>
+
+        <label for="issueDate">Issue Date:</label>
+        <input type="text" id="issueDate" name="issueDate" required>
+
+        <input type="submit" value="Submit">
+
+    </form>
+    <iframe src="" id="mypdf" frameborder="0" width="500px" height="500px"></iframe>
+
+</div>
+
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+<script src="index.js"></script>
+<script src="offer_letter.js"></script>
+</body>
+</html>
