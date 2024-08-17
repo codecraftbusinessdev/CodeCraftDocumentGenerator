@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Letter Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .inline-flex-parent {
+            display: inline-flex;
+        }
+        button {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Code craft Offer Letter generator</h1>
+
+<button id="generateOffer">Generate Offer Letter</button>
+<button id="sendEmailButton">Send Email</button>
+
+<br><br>
+
+<div class='parent inline-flex-parent'>
+    <div class="child">
+        <iframe src="" id="preview_offerletter_pdf" frameborder="0" width="500px"
+                height="720px"></iframe>
+    </div>
+    <div class="child">
+        <table id="offerTable">
+            <thead>
+            <tr>
+
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    const generateOffer = document.getElementById('generateOffer');
+
+    const offerTable = document.getElementById('offerTable');
+
+    generateOffer.addEventListener('click', async () => {
+
+
+        try {
+
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec?certificate_id='+id);
+            const data = await response.json();
+
+            if (data.error) {
+                alert(data.error); // Handle errors from the backend
+                return;
+            }
+
+            // Clear existing table rows before adding new data
+            offerTable.tBodies[0].innerHTML = '';
+
+            const tableRow1 = document.createElement('tr');
+            const tableRow2 = document.createElement('tr');
+            const tableRow3 = document.createElement('tr');
+            const tableRow4 = document.createElement('tr');
+            const tableRow5 = document.createElement('tr');
+            const tableRow6 = document.createElement('tr');
+            const tableRow7 = document.createElement('tr');
+            const tableRow8 = document.createElement('tr');
+            const tableRow9 = document.createElement('tr');
+            const tableRow10 = document.createElement('tr');
+            const tableRow11 = document.createElement('tr');
+            const tableRow12 = document.createElement('tr');
+            const tableRow13 = document.createElement('tr');
+            const tableRow14 = document.createElement('tr');
+            const tableRow15 = document.createElement('tr');
+
+            tableRow1.innerHTML = `
+                <th>Certificate ID</th>
+                <td>${data.data[0].certificate_id}</td>
+            `;
+            tableRow2.innerHTML = `
+                <th>Name</th>
+                <td>${data.data[0].name}</td>
+            `;
+            tableRow3.innerHTML = `
+                <th>Email</th>
+                <td>${data.data[0].email}</td>
+            `;
+            tableRow4.innerHTML = `
+                <th>Mobile No</th>
+                <td>${data.data[0].mobile_no}</td>
+            `;
+            tableRow5.innerHTML = `
+                <th>Gender</th>
+                <td>${data.data[0].gender}</td>
+            `;
+            tableRow6.innerHTML = `
+                <th>Internship Duration</th>
+                <td>${data.data[0].internship_duration}</td>
+            `;
+            tableRow7.innerHTML = `
+                <th>Internship Track</th>
+                <td>${data.data[0].internship_track}</td>
+            `;
+            tableRow8.innerHTML = `
+                <th>College Name</th>
+                <td>${data.data[0].college_name}</td>
+            `;
+            tableRow9.innerHTML = `
+                <th>Qualification</th>
+                <td>${data.data[0].qualification}</td>
+            `;
+            tableRow10.innerHTML = `
+                <th>Passing Year</th>
+                <td>${data.data[0].passing_year}</td>
+            `;
+            tableRow11.innerHTML = `
+                <th>Offer Letter Issue Date</th>
+                <td>${data.data[0].offer_letter_issue_date}</td>
+            `;
+            tableRow12.innerHTML = `
+                <th>Internship Start Date</th>
+                <td>${data.data[0].internship_start_date}</td>
+            `;
+            tableRow13.innerHTML = `
+                <th>Internship End Date</th>
+                <td>${data.data[0].internship_end_date}</td>
+            `;
+            tableRow14.innerHTML = `
+                <th>Internship Status</th>
+                <td>${data.data[0].internship_status}</td>
+            `;
+            tableRow15.innerHTML = `
+                <th>Certificate Issue Date</th>
+                <td>${data.data[0].certificate_issue_date}</td>
+            `;
+
+            offerTable.tBodies[0].appendChild(tableRow1);
+            offerTable.tBodies[0].appendChild(tableRow2);
+            offerTable.tBodies[0].appendChild(tableRow3);
+            offerTable.tBodies[0].appendChild(tableRow4);
+            offerTable.tBodies[0].appendChild(tableRow5);
+            offerTable.tBodies[0].appendChild(tableRow6);
+            offerTable.tBodies[0].appendChild(tableRow7);
+            offerTable.tBodies[0].appendChild(tableRow8);
+            offerTable.tBodies[0].appendChild(tableRow9);
+            offerTable.tBodies[0].appendChild(tableRow10);
+            offerTable.tBodies[0].appendChild(tableRow11);
+            offerTable.tBodies[0].appendChild(tableRow12);
+            offerTable.tBodies[0].appendChild(tableRow13);
+            offerTable.tBodies[0].appendChild(tableRow14);
+            offerTable.tBodies[0].appendChild(tableRow15);
+
+const letterId = data.data[0].certificate_id;
+        const letterName = data.data[0].name;
+        const letterInternshipDuration = data.data[0].internship_duration;
+        const letterInternshipTrack = data.data[0].internship_track;
+        const letterIssueDate = data.data[0].offer_letter_issue_date;
+        const letterStartDate = data.data[0].internship_start_date;
+        const letterEndDate = data.data[0].internship_end_date;
+
+        // Do something with the collected values, e.g.,
+        console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
+        const {PDFDocument,rgb} = PDFLib;
+
+        const exBytes = await fetch("./empty_offer_letter.pdf").then((res)=>
+            {return res.arrayBuffer();}
+        )
+
+        const r_Font = await fetch("./Poppins-Regular.ttf").then((res)=>
+            {return res.arrayBuffer();})
+
+        const b_Font = await fetch("./Poppins-SemiBold.ttf").then((res)=>
+            {return res.arrayBuffer();})
+
+        const pdfDoc = await PDFDocument.load(exBytes);
+
+        pdfDoc.registerFontkit(fontkit);
+        const regulerFont = await pdfDoc.embedFont(r_Font);
+        const boldFont = await pdfDoc.embedFont(b_Font);
+
+        const pages = pdfDoc.getPages();
+        const firstPage = pages[0];
+
+
+        // const internshipTrackSize = 20;
+        // const internshipTrackWidth = internshipTrackText.length * (internshipTrackSize / 2);
+
+        firstPage.drawText("Date : ",{
+            x: 60,
+            y: 670,
+            font:regulerFont,
+            size : 16
+        })
+
+        firstPage.drawText(letterIssueDate,{
+            x: 110,
+            y: 670,
+            font:boldFont,
+            size : 16
+        })
+
+        firstPage.drawText("CT.NO : ",{
+            x: 380,
+            y: 670,
+            font:regulerFont,
+            size : 16
+        });
+
+        firstPage.drawText(letterId,{
+            x: 440,
+            y: 670,
+            font:boldFont,
+            size : 16
+        });
+
+        firstPage.drawText("Dear",{
+             x: 60,
+             y: 620,
+             font:regulerFont,
+             size : 16
+        });
+
+        firstPage.drawText(letterName+",",{
+             x: 105,
+             y: 620,
+             font:boldFont,
+             size : 16
+        });
+
+        firstPage.drawText("We are pleased to offer you the position of ",{
+             x: 60,
+             y: 580,
+             font:regulerFont,
+             size : 14
+        });
+
+        firstPage.drawText(letterInternshipTrack,{
+             x: 360,
+             y: 580,
+             font:boldFont,
+             size : 14
+        });
+
+        firstPage.drawText("Intern at Code Craft. This is an educational internship. As a valued",{
+             x: 60,
+             y: 560,
+             font:regulerFont,
+             size : 14
+        });
+
+        firstPage.drawText("member of our team, you will have the opportunity to gain hands-on",{
+             x: 60,
+             y: 540,
+             font:regulerFont,
+             size : 14
+        });
+        firstPage.drawText("experience in this field.",{
+              x: 60,
+              y: 520,
+              font:regulerFont,
+              size : 14
+        });
+
+        firstPage.drawText("The internship is scheduled to commence on the "+ letterStartDate +" and",{
+              x: 60,
+              y: 480,
+              font:regulerFont,
+              size : 14
+        });
+
+        firstPage.drawText("will conclude on the "+ letterEndDate +" resulting in a " + letterInternshipDuration + " duration for",{
+              x: 60,
+              y: 460,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("the program.",{
+              x: 60,
+              y: 440,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("You also agree that you will follow all of the company’s policies that",{
+              x: 60,
+              y: 400,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("apply to non-employee interns. This letter constitutes the complete",{
+              x: 60,
+              y: 380,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("understanding between you and the company regarding your",{
+              x: 60,
+              y: 360,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("internship and supersedes all prior discussions or agreements. This",{
+              x: 60,
+              y: 340,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("letter may only be modified by a written agreement signed by both of",{
+              x: 60,
+              y: 320,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("us.",{
+              x: 60,
+              y: 300,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("We eagerly anticipate your commencement of the internship program",{
+              x: 60,
+              y: 260,
+              font:regulerFont,
+              size : 14
+        });
+        firstPage.drawText("at Code Craft and extend our best wishes for a prosperous experience.",{
+              x: 60,
+              y: 240,
+              font:regulerFont,
+              size : 14
+        });
+
+        const uri = await pdfDoc.saveAsBase64({dataUri : true});
+        document.querySelector("#preview_offerletter_pdf").src=uri;
+
+        const sendEmailButton = document.getElementById('sendEmailButton');
+
+        sendEmailButton.addEventListener('click', async () => {
+                alert('clicked');
+        });
+
+        } catch (error) {
+            console.error('Error fetching certificate:', error);
+            alert('An error occurred. Please try again later.' + error);
+        }
+    });
+
+</script>
+
+
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+
+</body>
+</html>

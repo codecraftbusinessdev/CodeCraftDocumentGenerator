@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <link rel="stylesheet" href="application.css">
+</head>
+<body>
+
+<button id="showButton">Verify</button>
+
+<table id="application_table">
+    <thead>
+    <tr>
+        <th>Certificate ID</th>
+        <th>Name</th>
+        <th>Duration</th>
+        <th>Track</th>
+        <th>Issue Date</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    const showButton = document.getElementById('showButton');
+
+    showButton.addEventListener('click', async () => {
+
+    try {
+
+    const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec');
+    const data = await response.json();
+
+    if (data.error) {
+        alert(data.error);
+        return;
+    }
+
+    const interns = data.data;
+    application_table.tBodies[0].innerHTML = '';
+
+    interns.forEach(intern=>{
+        const tableRow1 = document.createElement('tr');
+
+         tableRow1.innerHTML = `
+        <td>${intern.certificate_id}</td>
+        <td>${intern.name}</td>
+        <td>${intern.internship_duration}</td>
+        <td>${intern.internship_track}</td>
+        <td>${intern.offer_letter_issue_date}</td>
+        <td>${intern.internship_start_date}</td>
+        <td>${intern.internship_end_date}</td>
+        <td><a href="offer_letter_generate.html?id=${intern.certificate_id}">Generate</a></td>
+        `;
+
+    application_table.tBodies[0].appendChild(tableRow1);
+    });
+
+    } catch (error) {
+        console.error('Error fetching certificate:', error);
+        alert('An error occurred. Please try again later.' + error);
+      }
+    });
+
+</script>
+
+
+</body>
+
+</html>

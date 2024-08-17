@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="" />
+    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="init-project">
+      <change afterPath="$PROJECT_DIR$/application.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/offer_letter_generate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/offer_letter.js" beforeDir="false" afterPath="$PROJECT_DIR$/offer_letter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +61,15 @@
       <option name="presentableId" value="Default" />
       <updated>1723369780562</updated>
     </task>
+    <task id="LOCAL-00001" summary="init-project">
+      <option name="closed" value="true" />
+      <created>1723722536817</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723722536817</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -69,5 +88,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init-project" />
+    <option name="LAST_COMMIT_MESSAGE" value="init-project" />
   </component>
 </project>
