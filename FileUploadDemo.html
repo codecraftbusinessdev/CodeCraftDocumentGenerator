@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+<form id="uploadForm">
+    <input type="file" id="fileInput" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+<div id="message"></div>
+
+<script>
+    const form = document.getElementById('uploadForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const apiUrl = 'http://localhost:8080/upload/'; // Replace with your API URL
+        const filePath = 'emptyletter.pdf'; // Adjust the path as needed
+
+        // Fetch the PDF file
+        fetch(filePath)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.blob(); // Get the file as a Blob
+          })
+          .then(blob => {
+            const formData = new FormData();
+            formData.append('file', blob, 'demo.pdf'); // Append the Blob to FormData
+
+            // Send the POST request with the FormData
+            return fetch(apiUrl, {
+              method: 'POST',
+              body: formData,
+            });
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('File upload failed');
+            }
+            return response.json(); // Parse the JSON response
+          })
+          .then(result => {
+            console.log('File uploaded successfully:', result);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+
+    });
+</script>
+</body>
+</html>

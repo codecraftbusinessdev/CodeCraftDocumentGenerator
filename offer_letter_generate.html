@@ -47,6 +47,8 @@
 <button id="generateOffer">Generate Offer Letter</button>
 <button id="sendEmailButton">Send Email</button>
 
+<input type="file" id="file-upload" name="file-upload">
+
 <br><br>
 
 <div class='parent inline-flex-parent'>
@@ -78,7 +80,6 @@
     const offerTable = document.getElementById('offerTable');
 
     generateOffer.addEventListener('click', async () => {
-
 
         try {
 
@@ -371,14 +372,8 @@ const letterId = data.data[0].certificate_id;
         const sendEmailButton = document.getElementById('sendEmailButton');
 
         sendEmailButton.addEventListener('click', async () => {
-                alert('clicked');
-        });
 
-        } catch (error) {
-            console.error('Error fetching certificate:', error);
-            alert('An error occurred. Please try again later.' + error);
-        }
-    });
+        });
 
 </script>
 
