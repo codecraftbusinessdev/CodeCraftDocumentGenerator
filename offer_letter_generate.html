@@ -79,7 +79,6 @@
 
     generateOffer.addEventListener('click', async () => {
 
-
         try {
 
             const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec?certificate_id='+id);
@@ -198,7 +197,7 @@ const letterId = data.data[0].certificate_id;
         console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
         const {PDFDocument,rgb} = PDFLib;
 
-        const exBytes = await fetch("./empty_offer_letter.pdf").then((res)=>
+        const exBytes = await fetch("./emptyletter.pdf").then((res)=>
             {return res.arrayBuffer();}
         )
 
@@ -371,14 +370,8 @@ const letterId = data.data[0].certificate_id;
         const sendEmailButton = document.getElementById('sendEmailButton');
 
         sendEmailButton.addEventListener('click', async () => {
-                alert('clicked');
-        });
 
-        } catch (error) {
-            console.error('Error fetching certificate:', error);
-            alert('An error occurred. Please try again later.' + error);
-        }
-    });
+        });
 
 </script>
 
