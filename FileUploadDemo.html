@@ -20,7 +20,7 @@
         event.preventDefault();
 
         const apiUrl = 'http://localhost:8080/upload/'; // Replace with your API URL
-        const filePath = 'emptyletter.pdf'; // Adjust the path as needed
+        const filePath = 'empty_offer_letter'; // Adjust the path as needed
 
         // Fetch the PDF file
         fetch(filePath)
@@ -52,8 +52,6 @@
           .catch(error => {
             console.error('Error:', error);
           });
-
-
     });
 </script>
 </body>

@@ -47,8 +47,6 @@
 <button id="generateOffer">Generate Offer Letter</button>
 <button id="sendEmailButton">Send Email</button>
 
-<input type="file" id="file-upload" name="file-upload">
-
 <br><br>
 
 <div class='parent inline-flex-parent'>
@@ -199,7 +197,7 @@ const letterId = data.data[0].certificate_id;
         console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
         const {PDFDocument,rgb} = PDFLib;
 
-        const exBytes = await fetch("./empty_offer_letter.pdf").then((res)=>
+        const exBytes = await fetch("./emptyletter.pdf").then((res)=>
             {return res.arrayBuffer();}
         )
 
