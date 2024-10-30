@@ -74,11 +74,9 @@
     const id = urlParams.get('id');
 
     const generateOffer = document.getElementById('generateOffer');
-
     const offerTable = document.getElementById('offerTable');
 
     generateOffer.addEventListener('click', async () => {
-
 
         try {
 
@@ -131,7 +129,7 @@
             `;
             tableRow6.innerHTML = `
                 <th>Internship Duration</th>
-                <td>${data.data[0].internship_duration}</td>
+                <td>1 Month</td>
             `;
             tableRow7.innerHTML = `
                 <th>Internship Track</th>
@@ -304,7 +302,7 @@ const letterId = data.data[0].certificate_id;
               size : 14
         });
 
-        firstPage.drawText("will conclude on the "+ letterEndDate +" resulting in a " + letterInternshipDuration + " duration for",{
+        firstPage.drawText("will conclude on the "+ letterEndDate +" resulting in a " + "1 Month" + " duration for",{
               x: 60,
               y: 460,
               font:regulerFont,
@@ -365,13 +363,23 @@ const letterId = data.data[0].certificate_id;
               size : 14
         });
 
-        const uri = await pdfDoc.saveAsBase64({dataUri : true});
-        document.querySelector("#preview_offerletter_pdf").src=uri;
+        const pdfUri = await pdfDoc.saveAsBase64({dataUri : true});
+        document.querySelector("#preview_offerletter_pdf").src=pdfUri;
+
+        const pdfBytes = await pdfDoc.save()
+
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = letterName + 'Offer_Letter.pdf';
+        link.click();
+        URL.revokeObjectURL(url);
 
         const sendEmailButton = document.getElementById('sendEmailButton');
 
         sendEmailButton.addEventListener('click', async () => {
-                alert('clicked');
+
         });
 
         } catch (error) {
@@ -385,6 +393,7 @@ const letterId = data.data[0].certificate_id;
 
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+<script src="https://unpkg.com/downloadjs@1.4.7"></script>
 
 </body>
 </html>

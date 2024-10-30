@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+</head>
+
+<body>
+  <form id="uploadForm">
+    <input type="file" id="fileInput" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const data = {
+        "pdfUri": "data:application/pdf;base64,JVBERi0xLjcKJYGBgYEKCjYgMCBvYmoKPDwKL0ZpbHRlciAvRmxhdGVEZWNvZGUKL0xlbmd0aCAxMDIKPj4Kc3RyZWFtCnicK+RyCuEyUADBonQufY/UnLLUkszkRF1zA0sLEwsDcwtLBSMThZA0LhDpw2UIVmqoYGqgYAzEIblcNiYWZqZmzkDoZuRsZGBubuZmbgTkmRgZ2imEZHGFaHG5hnAFcgEAG4YXfQplbmRzdHJlYW0KZW5kb2JqCgo3IDAgb2JqCjw8Ci9GaWx0ZXIgL0ZsYXRlRGVjb2RlCi9UeXBlIC9PYmpTdG0KL04gNQovRmlyc3QgMjYKL0xlbmd0aCAzNjEKPj4Kc3RyZWFtCnic1VJRS8MwEH7Pr7hHfZCkadp0Mgbb2irIUDZBUXzo2jAqI5E2lfnvvWs7xx7EZykfyd19Sb7rfQEIkKAUhKATUBCFEiLQQQDTKeOPXx8G+EOxMy3jd3XVwityBKzhjfGl66yHgM1m7MRdFr7Yux0bDkFA5CPjoXFVV5oGpnmW50JoIUSsELEQMsV1iZggJMZYkwnuEVqNwJwOhQjnWMsHxHo4Q/WeG43nM1yRGxMnHbgqGeKfd+mtbLhD/qVnMmN85aq08AYu0msppAqEjGSodKBeLvF3NKbw7v821+uvnf21w7M503hpyI0hD/RT5mvTuq4pcezEyx1WaHNr9p/G12VxpcUkQZ06maDHRmPw5/vtuyl7KoXZwd9sPGkYEpRbmaouFu6A7hP4YQeAnZAH59Y6T67s/Wg9qqEoHj16JpkEMb7ptr4PKRkwviha00s96UQRtnRVbXfAn2o7t219TNCN3xSVxdkKZW5kc3RyZWFtCmVuZG9iagoKOCAwIG9iago8PAovU2l6ZSA5Ci9Sb290IDIgMCBSCi9JbmZvIDMgMCBSCi9GaWx0ZXIgL0ZsYXRlRGVjb2RlCi9UeXBlIC9YUmVmCi9MZW5ndGggNDAKL1cgWyAxIDIgMiBdCi9JbmRleCBbIDAgOSBdCj4+CnN0cmVhbQp4nBXEsREAIAwDsbfDHS2TsxKjJViFgG6zISk5VVrigHg/XxhhRAOYCmVuZHN0cmVhbQplbmRvYmoKCnN0YXJ0eHJlZgo2NTQKJSVFT0Y=",
+      };
+      const jsonData = JSON.stringify(data);
+      try {
+        const response = await fetch('http://localhost:8080/pdf/', {
+          method: 'POST',
+          body: data,
+          headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.text();
+        console.log('Server response:', result);
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      // const apiUrl = 'http://localhost:8080/upload/'; // Replace with your API URL
+      // const filePath = 'empty_offer_letter.pdf'; // Adjust the path as needed
+
+      // // Fetch the PDF file
+      // fetch(filePath)
+      //   .then(response => {
+      //     if (!response.ok) {
+      //       throw new Error('Network response was not ok');
+      //     }
+      //     return response.blob(); // Get the file as a Blob
+      //   })
+      //   .then(blob => {
+      //     const formData = new FormData();
+      //     formData.append('file', blob, 'demo.pdf'); // Append the Blob to FormData
+
+      //     // Send the POST request with the FormData
+      //     return fetch(apiUrl, {
+      //       method: 'POST',
+      //       body: formData,
+      //     });
+      //   })
+      //   .then(response => {
+      //     if (!response.ok) {
+      //       throw new Error('File upload failed');
+      //     }
+      //     return response.json(); // Parse the JSON response
+      //   })
+      //   .then(result => {
+      //     console.log('File uploaded successfully:', result);
+      //   })
+      //   .catch(error => {
+      //     console.error('Error:', error);
+      //   });
+
+
+
+
+    });
+  </script>
+</body>
+
+</html>
