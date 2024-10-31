@@ -49,14 +49,23 @@
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;" id="generateOffer">Generate Offer Letter</button>
+    cursor: pointer;" id="generateOffer">Generate Offer Letter
+</button>
+<br><br>
+<form id="uploadForm">
+    <input type="file" id="fileInput" name="file" required>
+</form>
+<div id="message"></div>
+<br><br>
 <button style="background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;" id="sendEmailButton">Send Offter Letter Email</button>
+    cursor: pointer;" id="sendEmailButton">Send Offter Letter Email
+</button>
 
+<br><br>
 <br><br>
 
 <button id="generateCertificate">Generate Certificate</button>
@@ -90,9 +99,70 @@
     const id = urlParams.get('id');
 
     const generateOffer = document.getElementById('generateOffer');
+    const sendEmailButton = document.getElementById('sendEmailButton');
     const offerTable = document.getElementById('offerTable');
 
     const generateCertificate = document.getElementById('generateCertificate');
+
+    let letterEmail;
+    let emailLetterName;
+    let emailLetterTrack;
+    let emailLetterDuration;
+    let emailLetterStartDate;
+    let emailLetterEndDate;
+
+
+<!--    send offer letter to server-->
+
+
+const form = document.getElementById('uploadForm');
+    const messageDiv = document.getElementById('message');
+
+    const fileInput = document.getElementById('fileInput');
+
+    sendEmailButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+
+      const fileInput = document.getElementById('fileInput');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    console.error('Please select a file to upload.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('email', letterEmail);
+  formData.append('name', emailLetterName);
+  formData.append('track', emailLetterTrack);
+  formData.append('duration', emailLetterDuration);
+  formData.append('startdate', emailLetterStartDate);
+  formData.append('enddate', emailLetterEndDate);
+
+  try {
+    const response = await fetch('http://localhost:8080/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error uploading file: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('File uploaded successfully:', data);
+
+
+    // Handle success (e.g., display a confirmation message)
+  } catch (error) {
+    console.error('Error uploading file:', error);
+
+    // Handle errors (e.g., display an error message to the user)
+  }
+
+    });
+
 
     generateOffer.addEventListener('click', async () => {
 
@@ -204,11 +274,18 @@
 
 const letterId = data.data[0].certificate_id;
         const letterName = data.data[0].name;
+        letterEmail = data.data[0].email
         const letterInternshipDuration = data.data[0].internship_duration;
         const letterInternshipTrack = data.data[0].internship_track;
         const letterIssueDate = data.data[0].offer_letter_issue_date;
         const letterStartDate = data.data[0].internship_start_date;
         const letterEndDate = data.data[0].internship_end_date;
+
+        emailLetterName = data.data[0].name;
+        emailLetterTrack = data.data[0].internship_track;
+        emailLetterDuration = data.data[0].internship_duration;
+        emailLetterStartDate = data.data[0].internship_start_date;
+        emailLetterEndDate = data.data[0].internship_end_date;
 
         // Do something with the collected values, e.g.,
         console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
@@ -393,12 +470,6 @@ const letterId = data.data[0].certificate_id;
         link.download = letterName + 'Offer_Letter.pdf';
         link.click();
         URL.revokeObjectURL(url);
-
-        const sendEmailButton = document.getElementById('sendEmailButton');
-
-        sendEmailButton.addEventListener('click', async () => {
-
-        });
 
         } catch (error) {
             console.error('Error fetching certificate:', error);
@@ -632,12 +703,6 @@ const letterId = data.data[0].certificate_id;
         link.click();
         URL.revokeObjectURL(url);
 
-        const sendCertificateEmailButton = document.getElementById('sendCertificateEmailButton');
-
-        sendCertificateEmailButton.addEventListener('click', async () => {
-
-        });
-
         } catch (error) {
             console.error('Error fetching certificate:', error);
             alert('An error occurred. Please try again later.' + error);
@@ -645,7 +710,7 @@ const letterId = data.data[0].certificate_id;
 
 
     });
-    
+
 </script>
 
 
