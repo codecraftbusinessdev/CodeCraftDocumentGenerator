@@ -13,7 +13,8 @@
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;" >Load data</button>
+    cursor: pointer;">Load data
+</button>
 
 <table id="application_table">
     <thead>
@@ -25,7 +26,7 @@
         <th>Issue Date</th>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Action</th>
+        <th>Show</th>
     </tr>
     </thead>
     <tbody>
@@ -61,8 +62,7 @@
         <td>${intern.offer_letter_issue_date}</td>
         <td>${intern.internship_start_date}</td>
         <td>${intern.internship_end_date}</td>
-        <td><a href="offer_letter_generate.html?id=${intern.certificate_id}">Generate</a></td>
-        `;
+        <td><a href="offer_letter_generate.html?id=${intern.certificate_id}">Generate</a></td>`;
 
     application_table.tBodies[0].appendChild(tableRow1);
     });
@@ -72,6 +72,7 @@
         alert('An error occurred. Please try again later.' + error);
       }
     });
+
 
 </script>
 

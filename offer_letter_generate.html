@@ -66,9 +66,18 @@
 </button>
 
 <br><br>
+
+<button  id="sendSubmissionMail">Send Submission Email </button>
+<br><br>
 <br><br>
 
 <button id="generateCertificate">Generate Certificate</button>
+<br><br>
+<form id="uploadForm2">
+    <input type="file" id="fileInput2" name="file" required>
+</form>
+<div id="message2"></div>
+<br><br>
 <button id="sendCertificateEmailButton">Send Certificate Email</button>
 
 <br><br>
@@ -103,6 +112,8 @@
     const offerTable = document.getElementById('offerTable');
 
     const generateCertificate = document.getElementById('generateCertificate');
+    const sendCertificateEmailButton = document.getElementById('sendCertificateEmailButton');
+    const sendSubmissionMail = document.getElementById('sendSubmissionMail');
 
     let letterEmail;
     let emailLetterName;
@@ -110,13 +121,14 @@
     let emailLetterDuration;
     let emailLetterStartDate;
     let emailLetterEndDate;
-
+    let emailCertificateno;
 
 <!--    send offer letter to server-->
 
 
 const form = document.getElementById('uploadForm');
     const messageDiv = document.getElementById('message');
+    const messageDiv2 = document.getElementById('message2');
 
     const fileInput = document.getElementById('fileInput');
 
@@ -163,6 +175,80 @@ const form = document.getElementById('uploadForm');
 
     });
 
+
+    sendSubmissionMail.addEventListener('click', async (event) => {
+      event.preventDefault();
+
+fetch('http://localhost:8080/submissionmail', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+        email: letterEmail,
+        name: emailLetterName,
+        enddate: emailLetterEndDate
+    })
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Success:', data);
+})
+.catch(error => {
+    console.error('There was an error with the fetch operation:', error);
+});
+
+    });
+
+
+  sendCertificateEmailButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+
+      const fileInput = document.getElementById('fileInput2');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    console.error('Please select a file to upload.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('email', letterEmail);
+  formData.append('name', emailLetterName);
+  formData.append('track', emailLetterTrack);
+  formData.append('duration', emailLetterDuration);
+  formData.append('startdate', emailLetterStartDate);
+  formData.append('enddate', emailLetterEndDate);
+  formData.append('certificateno', emailCertificateno);
+
+  try {
+    const response = await fetch('http://localhost:8080/certificatemail', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error uploading file: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('File uploaded successfully:', data);
+
+
+    // Handle success (e.g., display a confirmation message)
+  } catch (error) {
+    console.error('Error uploading file:', error);
+
+    // Handle errors (e.g., display an error message to the user)
+  }
+
+    });
 
     generateOffer.addEventListener('click', async () => {
 
@@ -272,15 +358,15 @@ const form = document.getElementById('uploadForm');
             offerTable.tBodies[0].appendChild(tableRow14);
             offerTable.tBodies[0].appendChild(tableRow15);
 
-const letterId = data.data[0].certificate_id;
+        const letterId = data.data[0].certificate_id;
         const letterName = data.data[0].name;
-        letterEmail = data.data[0].email
         const letterInternshipDuration = data.data[0].internship_duration;
         const letterInternshipTrack = data.data[0].internship_track;
         const letterIssueDate = data.data[0].offer_letter_issue_date;
         const letterStartDate = data.data[0].internship_start_date;
         const letterEndDate = data.data[0].internship_end_date;
 
+        letterEmail = data.data[0].email
         emailLetterName = data.data[0].name;
         emailLetterTrack = data.data[0].internship_track;
         emailLetterDuration = data.data[0].internship_duration;
@@ -601,6 +687,14 @@ const letterId = data.data[0].certificate_id;
         const collegeName = data.data[0].college_name;
         const internshipTrack = data.data[0].internship_track;
         const issueDate = data.data[0].internship_end_date;
+
+        letterEmail = data.data[0].email
+        emailLetterName = data.data[0].name;
+        emailLetterTrack = data.data[0].internship_track;
+        emailLetterDuration = data.data[0].internship_duration;
+        emailLetterStartDate = data.data[0].internship_start_date;
+        emailLetterEndDate = data.data[0].internship_end_date;
+        emailCertificateno = data.data[0].certificate_id;
 
         // Do something with the collected values, e.g.,
         console.log(certificateId, name, collegeName, internshipTrack, issueDate);
