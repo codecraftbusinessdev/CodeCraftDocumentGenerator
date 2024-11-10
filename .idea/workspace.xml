@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="OfferLetterEmail-1">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_10_24,_12_09 AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_10_24__12_09AM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_25_10_24,_12_02 AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_25_10_24__12_02AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="SubmissionMail-1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.html" beforeDir="false" afterPath="$PROJECT_DIR$/application.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/offer_letter_generate.html" beforeDir="false" afterPath="$PROJECT_DIR$/offer_letter_generate.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730339966231</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="SubmissionMail-1">
+      <option name="closed" value="true" />
+      <created>1731035445418</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731035445418</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -126,6 +131,7 @@
     <MESSAGE value="OfferLetterIssue-1" />
     <MESSAGE value="OfferLetterIssue-2" />
     <MESSAGE value="OfferLetterEmail-1" />
-    <option name="LAST_COMMIT_MESSAGE" value="OfferLetterEmail-1" />
+    <MESSAGE value="SubmissionMail-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="SubmissionMail-1" />
   </component>
 </project>

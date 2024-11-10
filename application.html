@@ -20,13 +20,14 @@
     <thead>
     <tr>
         <th>Certificate ID</th>
-        <th>Name</th>
-        <th>Duration</th>
-        <th>Track</th>
-        <th>Issue Date</th>
-        <th>Start Date</th>
-        <th>End Date</th>
         <th>Show</th>
+        <th>Name</th>
+        <th>Track</th>
+        <th>Offer Letter</th>
+        <th>Submission form</th>
+        <th>Certificate</th>
+        <th>Payment</th>
+
     </tr>
     </thead>
     <tbody>
@@ -40,7 +41,7 @@
 
     try {
 
-    const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec');
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzXdOywfQMfjsIS8nslAH5Uwqi2V5j0VUyZrE1q7QA6o8XzsA8PihdqnKHsksv6WYDO/exec');
     const data = await response.json();
 
     if (data.error) {
@@ -56,13 +57,13 @@
 
          tableRow1.innerHTML = `
         <td>${intern.certificate_id}</td>
+        <td><a href="offer_letter_generate.html?id=${intern.certificate_id}">Generate</a></td>
         <td>${intern.name}</td>
-        <td>1 Month</td>
         <td>${intern.internship_track}</td>
-        <td>${intern.offer_letter_issue_date}</td>
-        <td>${intern.internship_start_date}</td>
-        <td>${intern.internship_end_date}</td>
-        <td><a href="offer_letter_generate.html?id=${intern.certificate_id}">Generate</a></td>`;
+        <td>${intern.sent_offer_letter}</td>
+        <td>${intern.sent_submission_form}</td>
+        <td>${intern.sent_certificate}</td>
+        <td>${intern.payment}</td>`;
 
     application_table.tBodies[0].appendChild(tableRow1);
     });

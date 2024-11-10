@@ -254,7 +254,7 @@ fetch('http://localhost:8080/submissionmail', {
 
         try {
 
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec?certificate_id='+id);
+            const response = await fetch('https://script.google.com/macros/s/AKfycbzXdOywfQMfjsIS8nslAH5Uwqi2V5j0VUyZrE1q7QA6o8XzsA8PihdqnKHsksv6WYDO/exec?certificate_id='+id);
             const data = await response.json();
 
             if (data.error) {
@@ -280,6 +280,10 @@ fetch('http://localhost:8080/submissionmail', {
             const tableRow13 = document.createElement('tr');
             const tableRow14 = document.createElement('tr');
             const tableRow15 = document.createElement('tr');
+            const tableRow16 = document.createElement('tr');
+            const tableRow17 = document.createElement('tr');
+            const tableRow18 = document.createElement('tr');
+            const tableRow19 = document.createElement('tr');
 
             tableRow1.innerHTML = `
                 <th>Certificate ID</th>
@@ -342,6 +346,26 @@ fetch('http://localhost:8080/submissionmail', {
                 <td>${data.data[0].certificate_issue_date}</td>
             `;
 
+            tableRow16.innerHTML = `
+                <th>Offer Letter Status</th>
+                <td>${data.data[0].sent_offer_letter}</td>
+            `;
+
+            tableRow17.innerHTML = `
+                <th> Submission Form Status</th>
+                <td>${data.data[0].sent_submission_form}</td>
+            `;
+
+            tableRow18.innerHTML = `
+                <th>Certificate Status</th>
+                <td>${data.data[0].sent_certificate}</td>
+            `;
+
+            tableRow19.innerHTML = `
+                <th>Payment</th>
+                <td>${data.data[0].payment}</td>
+            `;
+
             offerTable.tBodies[0].appendChild(tableRow1);
             offerTable.tBodies[0].appendChild(tableRow2);
             offerTable.tBodies[0].appendChild(tableRow3);
@@ -357,6 +381,10 @@ fetch('http://localhost:8080/submissionmail', {
             offerTable.tBodies[0].appendChild(tableRow13);
             offerTable.tBodies[0].appendChild(tableRow14);
             offerTable.tBodies[0].appendChild(tableRow15);
+            offerTable.tBodies[0].appendChild(tableRow16);
+            offerTable.tBodies[0].appendChild(tableRow17);
+            offerTable.tBodies[0].appendChild(tableRow18);
+            offerTable.tBodies[0].appendChild(tableRow19);
 
         const letterId = data.data[0].certificate_id;
         const letterName = data.data[0].name;
@@ -566,18 +594,11 @@ fetch('http://localhost:8080/submissionmail', {
 
 
 
-
-
-
-
-
-
-
     generateCertificate.addEventListener('click', async () => {
 
         try {
 
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxRe02pDU20U792lyUrox09Rb3t481cSrOLGcvA2JfKp5L0EyO--CcAtin4e55G8bSt/exec?certificate_id='+id);
+            const response = await fetch('https://script.google.com/macros/s/AKfycbzXdOywfQMfjsIS8nslAH5Uwqi2V5j0VUyZrE1q7QA6o8XzsA8PihdqnKHsksv6WYDO/exec?certificate_id='+id);
             const data = await response.json();
 
             if (data.error) {
@@ -603,6 +624,10 @@ fetch('http://localhost:8080/submissionmail', {
             const tableRow13 = document.createElement('tr');
             const tableRow14 = document.createElement('tr');
             const tableRow15 = document.createElement('tr');
+            const tableRow16 = document.createElement('tr');
+            const tableRow17 = document.createElement('tr');
+            const tableRow18 = document.createElement('tr');
+            const tableRow19 = document.createElement('tr');
 
             tableRow1.innerHTML = `
                 <th>Certificate ID</th>
@@ -665,6 +690,27 @@ fetch('http://localhost:8080/submissionmail', {
                 <td>${data.data[0].certificate_issue_date}</td>
             `;
 
+            tableRow16.innerHTML = `
+                <th>Offer Letter Status</th>
+                <td>${data.data[0].sent_offer_letter}</td>
+            `;
+
+            tableRow17.innerHTML = `
+                <th> Submission Form Status</th>
+                <td>${data.data[0].sent_submission_form}</td>
+            `;
+
+            tableRow18.innerHTML = `
+                <th>Certificate Status</th>
+                <td>${data.data[0].sent_certificate}</td>
+            `;
+
+            tableRow19.innerHTML = `
+                <th>Payment</th>
+                <td>${data.data[0].payment}</td>
+            `;
+
+
             offerTable.tBodies[0].appendChild(tableRow1);
             offerTable.tBodies[0].appendChild(tableRow2);
             offerTable.tBodies[0].appendChild(tableRow3);
@@ -680,6 +726,10 @@ fetch('http://localhost:8080/submissionmail', {
             offerTable.tBodies[0].appendChild(tableRow13);
             offerTable.tBodies[0].appendChild(tableRow14);
             offerTable.tBodies[0].appendChild(tableRow15);
+            offerTable.tBodies[0].appendChild(tableRow16);
+            offerTable.tBodies[0].appendChild(tableRow17);
+            offerTable.tBodies[0].appendChild(tableRow18);
+            offerTable.tBodies[0].appendChild(tableRow19);
 
 
        const certificateId = data.data[0].certificate_id;
