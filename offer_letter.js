@@ -17,7 +17,7 @@ const generateOfferLetter = async (name)=>{
                 console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
                 const {PDFDocument,rgb} = PDFLib;
 
-                const exBytes = await fetch("./empty_offer_letter.pdf").then((res)=>
+                const exBytes = await fetch("./update_empty_offer_letter.pdf").then((res)=>
                     {return res.arrayBuffer();}
                 )
 

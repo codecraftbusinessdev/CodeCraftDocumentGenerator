@@ -378,7 +378,7 @@ fetch('http://localhost:8080/submissionmail', {
         console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
         const {PDFDocument,rgb} = PDFLib;
 
-        const exBytes = await fetch("./empty_offer_letter.pdf").then((res)=>
+        const exBytes = await fetch("./update_empty_offer_letter.pdf").then((res)=>
             {return res.arrayBuffer();}
         )
 
@@ -657,8 +657,6 @@ fetch('http://localhost:8080/submissionmail', {
                 <td>${data.data[0].certificate_issue_date}</td>
             `;
 
-
-
             offerTable.tBodies[0].appendChild(tableRow1);
             offerTable.tBodies[0].appendChild(tableRow2);
             offerTable.tBodies[0].appendChild(tableRow3);
@@ -680,7 +678,9 @@ fetch('http://localhost:8080/submissionmail', {
         const name = data.data[0].name;
         const collegeName = data.data[0].college_name;
         const internshipTrack = data.data[0].internship_track;
-        const issueDate = data.data[0].internship_end_date;
+        const internshipStartDate = data.data[0].internship_start_date;
+        const internshipEndDate = data.data[0].internship_end_date;
+        const issueDate = data.data[0].certificate_issue_date;
 
         letterEmail = data.data[0].email
         emailLetterName = data.data[0].name;
@@ -694,7 +694,7 @@ fetch('http://localhost:8080/submissionmail', {
         console.log(certificateId, name, collegeName, internshipTrack, issueDate);
         const {PDFDocument,rgb} = PDFLib;
 
-        const exBytes = await fetch("./empty_cert.pdf").then((res)=>
+        const exBytes = await fetch("./updated_empty_certificate.pdf").then((res)=>
             {return res.arrayBuffer();}
         )
 
@@ -743,10 +743,34 @@ fetch('http://localhost:8080/submissionmail', {
         const collegeNameSize = 20;
         const collegeNameWidth = boldFont.widthOfTextAtSize(fullCollegeNameText,collegeNameSize);
 
-        firstPage.drawText(fullCollegeNameText,{
+<!--        firstPage.drawText(fullCollegeNameText,{-->
 
-            x: (firstPage.getWidth() - collegeNameWidth) / 2  ,
-            y: 280,
+<!--            x: (firstPage.getWidth() - collegeNameWidth) / 2  ,-->
+<!--            y: 280,-->
+<!--            color:rgb(0.118, 0.212, 0.325),-->
+<!--            font:boldFont,-->
+<!--            size : 20-->
+<!--        })-->
+
+        const internshipStartDateText = internshipStartDate;
+        // const internshipStartDateSize = 20;
+        // const internshipStartDateWidth = internshipStartDateText.length * (internshipStartDateSize / 2);
+
+        firstPage.drawText(internshipStartDateText,{
+            x: 224,
+            y: 222,
+            color:rgb(0.118, 0.212, 0.325),
+            font:boldFont,
+            size : 20
+        })
+
+        const internshipEndDateText = internshipEndDate;
+        // const internshipEndDateSize = 20;
+        // const internshipEndDateWidth = internshipEndDateText.length * (internshipEndDateSize / 2);
+
+        firstPage.drawText(internshipEndDateText,{
+            x: 380,
+            y: 222,
             color:rgb(0.118, 0.212, 0.325),
             font:boldFont,
             size : 20
@@ -758,9 +782,8 @@ fetch('http://localhost:8080/submissionmail', {
         // const internshipTrackWidth = internshipTrackText.length * (internshipTrackSize / 2);
 
         firstPage.drawText(internshipTrackText,{
-
-            x: 360,
-            y: 205,
+            x: 390,
+            y: 192,
             color:rgb(0.118, 0.212, 0.325),
             font:boldFont,
             size : 20
@@ -795,8 +818,6 @@ fetch('http://localhost:8080/submissionmail', {
             console.error('Error fetching certificate:', error);
             alert('An error occurred. Please try again later.' + error);
         }
-
-
     });
 
 </script>
