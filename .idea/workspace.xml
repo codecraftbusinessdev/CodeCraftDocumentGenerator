@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="MailBugFix-1">
-      <change afterPath="$PROJECT_DIR$/update_empty_offer_letter.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/updated_empty_certificate.pdf" afterDir="false" />
+    <list default="true" id="47a30466-ab3e-424a-bcae-2501f706f6bc" name="Changes" comment="OfferLetterUpdated-1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/offer_letter.js" beforeDir="false" afterPath="$PROJECT_DIR$/offer_letter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileUploadDemo.html" beforeDir="false" afterPath="$PROJECT_DIR$/FileUploadDemo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/offer_letter_generate.html" beforeDir="false" afterPath="$PROJECT_DIR$/offer_letter_generate.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731277095255</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="OfferLetterUpdated-1">
+      <option name="closed" value="true" />
+      <created>1731466933609</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731466933609</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +160,7 @@
     <MESSAGE value="SubmissionMail-1" />
     <MESSAGE value="SubmissionMail-2" />
     <MESSAGE value="MailBugFix-1" />
-    <option name="LAST_COMMIT_MESSAGE" value="MailBugFix-1" />
+    <MESSAGE value="OfferLetterUpdated-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="OfferLetterUpdated-1" />
   </component>
 </project>

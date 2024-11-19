@@ -52,11 +52,6 @@
     cursor: pointer;" id="generateOffer">Generate Offer Letter
 </button>
 <br><br>
-<form id="uploadForm">
-    <input type="file" id="fileInput" name="file" required>
-</form>
-<div id="message"></div>
-<br><br>
 <button style="background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -119,59 +114,83 @@
     let emailLetterName;
     let emailLetterTrack;
     let emailLetterDuration;
+    let emailLetterIssueDate;
     let emailLetterStartDate;
     let emailLetterEndDate;
     let emailCertificateno;
 
 <!--    send offer letter to server-->
 
-
-const form = document.getElementById('uploadForm');
-    const messageDiv = document.getElementById('message');
     const messageDiv2 = document.getElementById('message2');
-
-    const fileInput = document.getElementById('fileInput');
 
     sendEmailButton.addEventListener('click', async (event) => {
       event.preventDefault();
 
-      const fileInput = document.getElementById('fileInput');
-  const file = fileInput.files[0];
-
-  if (!file) {
-    console.error('Please select a file to upload.');
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('email', letterEmail);
-  formData.append('name', emailLetterName);
-  formData.append('track', emailLetterTrack);
-  formData.append('duration', emailLetterDuration);
-  formData.append('startdate', emailLetterStartDate);
-  formData.append('enddate', emailLetterEndDate);
-
-  try {
-    const response = await fetch('http://localhost:8080/upload', {
-      method: 'POST',
-      body: formData,
-    });
-
+fetch('http://localhost:8080/genPdf', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+        certificate_id : emailCertificateno,
+        name: emailLetterName,
+        email: letterEmail,
+        track : emailLetterTrack,
+        issuedate : emailLetterIssueDate,
+        startdate : emailLetterStartDate,
+        enddate: emailLetterEndDate
+    })
+})
+.then(response => {
     if (!response.ok) {
-      throw new Error(`Error uploading file: ${response.statusText}`);
+        throw new Error('Network response was not ok');
     }
+    return response.json();
+})
+.then(data => {
+    console.log('Success:', data);
+})
+.catch(error => {
+    console.error('There was an error with the fetch operation:', error);
+});
 
-    const data = await response.json();
-    console.log('File uploaded successfully:', data);
+<!--      const fileInput = document.getElementById('fileInput');-->
+<!--      const file = fileInput.files[0];-->
+
+<!--  if (!file) {-->
+<!--    console.error('Please select a file to upload.');-->
+<!--    return;-->
+<!--  }-->
+
+<!--  const formData = new FormData();-->
+<!--  formData.append('file', file);-->
+<!--  formData.append('email', letterEmail);-->
+<!--  formData.append('name', emailLetterName);-->
+<!--  formData.append('track', emailLetterTrack);-->
+<!--  formData.append('duration', emailLetterDuration);-->
+<!--  formData.append('startdate', emailLetterStartDate);-->
+<!--  formData.append('enddate', emailLetterEndDate);-->
+
+<!--  try {-->
+<!--    const response = await fetch('http://localhost:8080/upload', {-->
+<!--      method: 'POST',-->
+<!--      body: formData,-->
+<!--    });-->
+
+<!--    if (!response.ok) {-->
+<!--      throw new Error(`Error uploading file: ${response.statusText}`);-->
+<!--    }-->
+
+<!--    const data = await response.json();-->
+<!--    console.log('File uploaded successfully:', data);-->
 
 
-    // Handle success (e.g., display a confirmation message)
-  } catch (error) {
-    console.error('Error uploading file:', error);
+<!--    // Handle success (e.g., display a confirmation message)-->
+<!--  } catch (error) {-->
+<!--    console.error('Error uploading file:', error);-->
 
-    // Handle errors (e.g., display an error message to the user)
-  }
+<!--    // Handle errors (e.g., display an error message to the user)-->
+<!--  }-->
 
     });
 
@@ -367,196 +386,202 @@ fetch('http://localhost:8080/submissionmail', {
         const letterStartDate = data.data[0].internship_start_date;
         const letterEndDate = data.data[0].internship_end_date;
 
+        emailCertificateno = data.data[0].certificate_id
         letterEmail = data.data[0].email
         emailLetterName = data.data[0].name;
         emailLetterTrack = data.data[0].internship_track;
         emailLetterDuration = data.data[0].internship_duration;
         emailLetterStartDate = data.data[0].internship_start_date;
         emailLetterEndDate = data.data[0].internship_end_date;
+        emailLetterIssueDate =data.data[0].offer_letter_issue_date;
+
+
+
+
 
         // Do something with the collected values, e.g.,
-        console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);
-        const {PDFDocument,rgb} = PDFLib;
+<!--        console.log(letterId, letterName,letterInternshipTrack, letterIssueDate,letterStartDate,letterEndDate);-->
+<!--        const {PDFDocument,rgb} = PDFLib;-->
 
-        const exBytes = await fetch("./update_empty_offer_letter.pdf").then((res)=>
-            {return res.arrayBuffer();}
-        )
+<!--        const exBytes = await fetch("./update_empty_offer_letter.pdf").then((res)=>-->
+<!--            {return res.arrayBuffer();}-->
+<!--        )-->
 
-        const r_Font = await fetch("./Poppins-Regular.ttf").then((res)=>
-            {return res.arrayBuffer();})
+<!--        const r_Font = await fetch("./Poppins-Regular.ttf").then((res)=>-->
+<!--            {return res.arrayBuffer();})-->
 
-        const b_Font = await fetch("./Poppins-SemiBold.ttf").then((res)=>
-            {return res.arrayBuffer();})
+<!--        const b_Font = await fetch("./Poppins-SemiBold.ttf").then((res)=>-->
+<!--            {return res.arrayBuffer();})-->
 
-        const pdfDoc = await PDFDocument.load(exBytes);
+<!--        const pdfDoc = await PDFDocument.load(exBytes);-->
 
-        pdfDoc.registerFontkit(fontkit);
-        const regulerFont = await pdfDoc.embedFont(r_Font);
-        const boldFont = await pdfDoc.embedFont(b_Font);
+<!--        pdfDoc.registerFontkit(fontkit);-->
+<!--        const regulerFont = await pdfDoc.embedFont(r_Font);-->
+<!--        const boldFont = await pdfDoc.embedFont(b_Font);-->
 
-        const pages = pdfDoc.getPages();
-        const firstPage = pages[0];
+<!--        const pages = pdfDoc.getPages();-->
+<!--        const firstPage = pages[0];-->
 
 
-        // const internshipTrackSize = 20;
-        // const internshipTrackWidth = internshipTrackText.length * (internshipTrackSize / 2);
+<!--        // const internshipTrackSize = 20;-->
+<!--        // const internshipTrackWidth = internshipTrackText.length * (internshipTrackSize / 2);-->
 
-        firstPage.drawText("Date : ",{
-            x: 60,
-            y: 670,
-            font:regulerFont,
-            size : 16
-        })
+<!--        firstPage.drawText("Date : ",{-->
+<!--            x: 60,-->
+<!--            y: 670,-->
+<!--            font:regulerFont,-->
+<!--            size : 16-->
+<!--        })-->
 
-        firstPage.drawText(letterIssueDate,{
-            x: 110,
-            y: 670,
-            font:boldFont,
-            size : 16
-        })
+<!--        firstPage.drawText(letterIssueDate,{-->
+<!--            x: 110,-->
+<!--            y: 670,-->
+<!--            font:boldFont,-->
+<!--            size : 16-->
+<!--        })-->
 
-        firstPage.drawText("CT.NO : ",{
-            x: 380,
-            y: 670,
-            font:regulerFont,
-            size : 16
-        });
+<!--        firstPage.drawText("CT.NO : ",{-->
+<!--            x: 380,-->
+<!--            y: 670,-->
+<!--            font:regulerFont,-->
+<!--            size : 16-->
+<!--        });-->
 
-        firstPage.drawText(letterId,{
-            x: 440,
-            y: 670,
-            font:boldFont,
-            size : 16
-        });
+<!--        firstPage.drawText(letterId,{-->
+<!--            x: 440,-->
+<!--            y: 670,-->
+<!--            font:boldFont,-->
+<!--            size : 16-->
+<!--        });-->
 
-        firstPage.drawText("Dear",{
-             x: 60,
-             y: 620,
-             font:regulerFont,
-             size : 16
-        });
+<!--        firstPage.drawText("Dear",{-->
+<!--             x: 60,-->
+<!--             y: 620,-->
+<!--             font:regulerFont,-->
+<!--             size : 16-->
+<!--        });-->
 
-        firstPage.drawText(letterName+",",{
-             x: 105,
-             y: 620,
-             font:boldFont,
-             size : 16
-        });
+<!--        firstPage.drawText(letterName+",",{-->
+<!--             x: 105,-->
+<!--             y: 620,-->
+<!--             font:boldFont,-->
+<!--             size : 16-->
+<!--        });-->
 
-        firstPage.drawText("We are pleased to offer you the position of ",{
-             x: 60,
-             y: 580,
-             font:regulerFont,
-             size : 14
-        });
+<!--        firstPage.drawText("We are pleased to offer you the position of ",{-->
+<!--             x: 60,-->
+<!--             y: 580,-->
+<!--             font:regulerFont,-->
+<!--             size : 14-->
+<!--        });-->
 
-        firstPage.drawText(letterInternshipTrack,{
-             x: 360,
-             y: 580,
-             font:boldFont,
-             size : 14
-        });
+<!--        firstPage.drawText(letterInternshipTrack,{-->
+<!--             x: 360,-->
+<!--             y: 580,-->
+<!--             font:boldFont,-->
+<!--             size : 14-->
+<!--        });-->
 
-        firstPage.drawText("Intern at Code Craft. This is an educational internship. As a valued",{
-             x: 60,
-             y: 560,
-             font:regulerFont,
-             size : 14
-        });
+<!--        firstPage.drawText("Intern at Code Craft. This is an educational internship. As a valued",{-->
+<!--             x: 60,-->
+<!--             y: 560,-->
+<!--             font:regulerFont,-->
+<!--             size : 14-->
+<!--        });-->
 
-        firstPage.drawText("member of our team, you will have the opportunity to gain hands-on",{
-             x: 60,
-             y: 540,
-             font:regulerFont,
-             size : 14
-        });
-        firstPage.drawText("experience in this field.",{
-              x: 60,
-              y: 520,
-              font:regulerFont,
-              size : 14
-        });
+<!--        firstPage.drawText("member of our team, you will have the opportunity to gain hands-on",{-->
+<!--             x: 60,-->
+<!--             y: 540,-->
+<!--             font:regulerFont,-->
+<!--             size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("experience in this field.",{-->
+<!--              x: 60,-->
+<!--              y: 520,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
 
-        firstPage.drawText("The internship is scheduled to commence on the "+ letterStartDate +" and",{
-              x: 60,
-              y: 480,
-              font:regulerFont,
-              size : 14
-        });
+<!--        firstPage.drawText("The internship is scheduled to commence on the "+ letterStartDate +" and",{-->
+<!--              x: 60,-->
+<!--              y: 480,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
 
-        firstPage.drawText("will conclude on the "+ letterEndDate +" resulting in a " + "1 Month" + " duration for",{
-              x: 60,
-              y: 460,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("the program.",{
-              x: 60,
-              y: 440,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("You also agree that you will follow all of the company’s policies that",{
-              x: 60,
-              y: 400,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("apply to non-employee interns. This letter constitutes the complete",{
-              x: 60,
-              y: 380,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("understanding between you and the company regarding your",{
-              x: 60,
-              y: 360,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("internship and supersedes all prior discussions or agreements. This",{
-              x: 60,
-              y: 340,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("letter may only be modified by a written agreement signed by both of",{
-              x: 60,
-              y: 320,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("us.",{
-              x: 60,
-              y: 300,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("We eagerly anticipate your commencement of the internship program",{
-              x: 60,
-              y: 260,
-              font:regulerFont,
-              size : 14
-        });
-        firstPage.drawText("at Code Craft and extend our best wishes for a prosperous experience.",{
-              x: 60,
-              y: 240,
-              font:regulerFont,
-              size : 14
-        });
+<!--        firstPage.drawText("will conclude on the "+ letterEndDate +" resulting in a " + "1 Month" + " duration for",{-->
+<!--              x: 60,-->
+<!--              y: 460,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("the program.",{-->
+<!--              x: 60,-->
+<!--              y: 440,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("You also agree that you will follow all of the company’s policies that",{-->
+<!--              x: 60,-->
+<!--              y: 400,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("apply to non-employee interns. This letter constitutes the complete",{-->
+<!--              x: 60,-->
+<!--              y: 380,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("understanding between you and the company regarding your",{-->
+<!--              x: 60,-->
+<!--              y: 360,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("internship and supersedes all prior discussions or agreements. This",{-->
+<!--              x: 60,-->
+<!--              y: 340,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("letter may only be modified by a written agreement signed by both of",{-->
+<!--              x: 60,-->
+<!--              y: 320,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("us.",{-->
+<!--              x: 60,-->
+<!--              y: 300,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("We eagerly anticipate your commencement of the internship program",{-->
+<!--              x: 60,-->
+<!--              y: 260,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
+<!--        firstPage.drawText("at Code Craft and extend our best wishes for a prosperous experience.",{-->
+<!--              x: 60,-->
+<!--              y: 240,-->
+<!--              font:regulerFont,-->
+<!--              size : 14-->
+<!--        });-->
 
-        const pdfUri = await pdfDoc.saveAsBase64({dataUri : true});
-        document.querySelector("#preview_offerletter_pdf").src=pdfUri;
+<!--        const pdfUri = await pdfDoc.saveAsBase64({dataUri : true});-->
+<!--        document.querySelector("#preview_offerletter_pdf").src=pdfUri;-->
 
-        const pdfBytes = await pdfDoc.save()
+<!--        const pdfBytes = await pdfDoc.save()-->
 
-        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = letterName + 'Offer_Letter.pdf';
-        link.click();
-        URL.revokeObjectURL(url);
+<!--        const blob = new Blob([pdfBytes], { type: 'application/pdf' });-->
+<!--        const url = URL.createObjectURL(blob);-->
+<!--        const link = document.createElement('a');-->
+<!--        link.href = url;-->
+<!--        link.download = letterName + 'Offer_Letter.pdf';-->
+<!--        link.click();-->
+<!--        URL.revokeObjectURL(url);-->
 
         } catch (error) {
             console.error('Error fetching certificate:', error);
